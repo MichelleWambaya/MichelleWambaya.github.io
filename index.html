@@ -37,6 +37,66 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
+  body.light-theme {
+  --primary-brown: #fcae87;
+  --caramel: #f4ab70;
+  --light-brown: #f7ad54;
+  --golden: #fcc071;
+  --dark-brown: #ffffff;
+  --cream: #f8d175;
+  --dark-bg: #fbebeb;
+  --card-bg: #fdf6ec;
+  --text-light: #2b2b2b;
+  --text-muted: #462205;
+  --accent: #fae7e0;
+  --success: #ffffff;
+  --border: #dddddd;
+}
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.theme-toggle-slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 30px;
+  width: 70px;
+  height: 32px;
+  position: relative;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.theme-toggle-slider .icon {
+  font-size: 14px;
+  z-index: 2;
+}
+
+.theme-toggle-slider .slider-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 26px;
+  width: 26px;
+  background: var(--accent);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+#themeToggle {
+  display: none;
+}
+
+#themeToggle:checked + .theme-toggle-slider .slider-thumb {
+  transform: translateX(38px);
+}
 
   /* Enhanced Animated Background */
   .animated-bg {
@@ -274,6 +334,7 @@
     height: 3px;
     background: linear-gradient(45deg, var(--caramel), var(--golden));
   }
+  
 
   /* About Section */
   .about-content {
@@ -300,6 +361,7 @@
     border: 3px solid var(--golden);
     position: relative;
     overflow: hidden;
+    
   }
 
   .profile-image::before {
@@ -310,7 +372,7 @@
     right: -3px;
     bottom: -3px;
     background: linear-gradient(45deg, var(--golden), var(--caramel), var(--golden));
-    border-radius: 50%;
+    border-radius: 0%;
     z-index: -1;
     animation: rotate 3s linear infinite;
   }
@@ -318,6 +380,241 @@
   @keyframes rotate {
     100% { transform: rotate(360deg); }
   }
+
+/* Elevator Section */
+#elevator {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(139, 69, 19, 0.1) 100%);
+  margin: 2rem 0;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+#elevator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23DAA520" opacity="0.1"/><circle cx="80" cy="80" r="1" fill="%23D2691E" opacity="0.1"/><circle cx="40" cy="60" r="1" fill="%23DEB887" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.elevator-container {
+  position: relative;
+  z-index: 2;
+}
+
+.elevator-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.video-container {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background: var(--dark-bg);
+  aspect-ratio: 16/9;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border: 2px solid var(--golden);
+}
+
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary-brown), var(--dark-brown));
+  color: var(--text-light);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+  background: linear-gradient(45deg, var(--caramel), var(--golden));
+  transform: scale(1.02);
+}
+
+.video-placeholder i {
+  font-size: 4rem;
+  color: var(--golden);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+  animation: pulse 2s infinite;
+}
+
+.video-placeholder p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Video styles for when you add the actual video */
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.elevator-text {
+  padding: 2rem;
+}
+
+.elevator-text h3 {
+  color: var(--golden);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.elevator-text h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(45deg, var(--caramel), var(--golden));
+}
+
+.elevator-text p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.elevator-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.stat-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--golden);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive Design for Elevator Section */
+@media (max-width: 768px) {
+  .elevator-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .elevator-text {
+    padding: 1rem;
+  }
+  
+  .elevator-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .video-placeholder i {
+    font-size: 3rem;
+  }
+  
+  .video-placeholder p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .elevator-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animation for stats counting effect */
+.stat-number {
+  animation: countUp 2s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced hover effects */
+.video-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.video-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-container:hover::after {
+  opacity: 1;
+}
+
 
   .about-text {
     font-size: 1.1rem;
@@ -846,7 +1143,9 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-container">
-      <a href="#" class="logo">MW</a>
+       <a href="#" class="logo">     
+       <img src="blcksamurai.webp" alt="Curious child" style="width:28%;border-radius:0px;">
+      </a>
       <button class="menu-toggle" id="menuToggle">
         <i class="fas fa-bars"></i>
       </button>
@@ -857,9 +1156,10 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="more.html">More About Me</a></li>
+        <li><a href="more.html">More DE Projects</a></li>
       </ul>
     </div>
+    
   </nav>
 
   <!-- Header -->
@@ -876,20 +1176,78 @@
         </a>
       </div>
     </div>
+    <div class="theme-toggle-wrapper">
+      <input type="checkbox" id="themeToggle" />
+      <label for="themeToggle" class="theme-toggle-slider">
+        <span class="icon moon">🌙</span>
+        <span class="icon sun">☀️</span>
+        <span class="slider-thumb"></span>
+      </label>
+    </div>
+    
   </header>
+<!-- HTML - Add this before the About Section -->
+<section id="elevator" class="fade-in">
+  <div class="elevator-container">
+    <h2 class="section-title">My Elevator Pitch</h2>
+    <div class="elevator-content">
+      <div class="video-container">
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle"></i>
+          <p>Video Coming Soon</p>
+        </div>
+        <!-- Replace the placeholder div above with your video when ready:
+        <video controls poster="your-thumbnail.jpg">
+          <source src="your-video.mp4" type="video/mp4">
+          <source src="your-video.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+        -->
+      </div>
+      <div class="elevator-text">
+        <h3>60 Seconds to Know Me</h3>
+        <p>
+          Hi! I'm Michelle Wambaya, a passionate data engineer and DevOps professional from Kenya. 
+          With a unique background combining economics, finance, and technology, I bring a analytical 
+          mindset to solving complex data challenges.
+        </p>
+        <p>
+          I specialize in building scalable data pipelines, cloud infrastructure, and full-stack 
+          applications that drive real business value. My recent work includes implementing CI/CD 
+          pipelines that reduced deployment times by 70% and creating environmental monitoring 
+          systems using GIS technology.
+        </p>
+        <div class="elevator-stats">
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Projects Delivered</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">50K+</span>
+            <span class="stat-label">Data Points Processed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">70%</span>
+            <span class="stat-label">Performance Improvement</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- About Section -->
   <section id="about" class="fade-in">
     <h2 class="section-title">About Me</h2>
     <div class="about-content">
       <div class="profile-section">
-        <div class="profile-image">👩🏾‍💻</div>
+        <div class="profile-image"><img src="file_00000000f4606230a02bd1816bd83d5f (1).png" style="zoom: 24%;"></div>
         <a href="https://drive.google.com/file/d/your-cv-link" target="_blank" class="cv-download">
           <i class="fas fa-download"></i> Download CV
         </a>
       </div>
       <div class="about-text">
-        <p>I'm Michelle Wambaya, a 22-year-old technology professional from Kenya with a background in Economics and Finance from Kenyatta University. I discovered my passion for technology while balancing my studies, teaching myself programming, data analysis, and cloud technologies.</p>
         
         <p>My journey has evolved from economics student to full-stack developer and aspiring data engineer. I've worked as a Developer Consultant, handled DevOps and automation projects, and explored real-world data applications through externships and research.</p>
         
@@ -1497,5 +1855,30 @@
       typeWriter(subtitle, originalText, 50);
     }, 1500);
   </script>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+
+  // Load saved theme
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-theme');
+      toggle.checked = true;
+    }
+  });
+
+  // Toggle theme
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+      document.body.classList.add('light-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.remove('light-theme');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+
 </body>
 </html>

@@ -1,1195 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Michelle Wambaya | Data Engineer & DevOps Professional</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩🏾‍💻</text></svg>" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-  :root {
-    --primary-brown: #8B4513;
-    --caramel: #D2691E;
-    --light-brown: #DEB887;
-    --golden: #DAA520;
-    --dark-brown: #654321;
-    --cream: #F5F5DC;
-    --dark-bg: #0a0a0a;
-    --card-bg: #1a1a1a;
-    --text-light: #f0f0f0;
-    --text-muted: #b0b0b0;
-    --accent: #FF6B35;
-    --success: #4CAF50;
-    --border: #333;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--dark-bg);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* Enhanced Animated Background */
-  .animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background: linear-gradient(45deg, 
-      var(--dark-bg) 0%, 
-      var(--dark-brown) 25%, 
-      var(--primary-brown) 50%, 
-      var(--dark-brown) 75%, 
-      var(--dark-bg) 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientMove 20s ease infinite;
-  }
-
-  @keyframes gradientMove {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  /* Floating Geometric Shapes */
-  .geometric-shapes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .shape {
-    position: absolute;
-    opacity: 0.1;
-  }
-
-  .shape-circle {
-    border-radius: 50%;
-    background: var(--golden);
-    animation: float 15s infinite ease-in-out;
-  }
-
-  .shape-square {
-    background: var(--caramel);
-    animation: rotate-float 20s infinite linear;
-  }
-
-  .shape-triangle {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    animation: pulse-float 12s infinite ease-in-out;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-  }
-
-  @keyframes rotate-float {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-100vh) rotate(360deg); }
-  }
-
-  @keyframes pulse-float {
-    0%, 100% { transform: scale(1) translateY(0px); opacity: 0.1; }
-    50% { transform: scale(1.2) translateY(-30px); opacity: 0.3; }
-  }
-
-  /* Navigation */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(15px);
-    z-index: 1000;
-    padding: 1rem 0;
-    transition: all 0.3s ease;
-  }
-
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-  }
-
-  .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--golden);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
-  .nav-links a {
-    color: var(--text-light);
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--golden);
-    transition: width 0.3s ease;
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  .nav-links a:hover {
-    color: var(--golden);
-  }
-
-  /* Mobile menu toggle */
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-
-  /* Header */
-  header {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-  }
-
-  .hero-content {
-    max-width: 800px;
-    padding: 0 2rem;
-  }
-
-  .hero-content h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--golden), var(--caramel), var(--light-brown));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 50px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .btn-primary {
-    background: linear-gradient(45deg, var(--golden), var(--caramel));
-    color: white;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--golden);
-    border: 2px solid var(--golden);
-  }
-
-  .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
-  }
-
-  /* Sections */
-  section {
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--golden);
-    position: relative;
-  }
-
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(45deg, var(--caramel), var(--golden));
-  }
-
-  /* About Section */
-  .about-content {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .profile-section {
-    text-align: center;
-  }
-
-  .profile-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 6rem;
-    margin: 0 auto 1rem;
-    border: 3px solid var(--golden);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .profile-image::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(45deg, var(--golden), var(--caramel), var(--golden));
-    border-radius: 50%;
-    z-index: -1;
-    animation: rotate 3s linear infinite;
-  }
-
-  @keyframes rotate {
-    100% { transform: rotate(360deg); }
-  }
-
-  .about-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-muted);
-  }
-
-  .about-text p {
-    margin-bottom: 1.5rem;
-  }
-
-  .cv-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--golden);
-    color: var(--dark-bg);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-  }
-
-  .cv-download:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
-  }
-
-  /* Experience Timeline */
-  .timeline {
-    position: relative;
-    margin: 3rem 0;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--golden);
-    transform: translateX(-50%);
-  }
-
-  .timeline-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 3rem 0;
-    position: relative;
-  }
-
-  .timeline-item:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-
-  .timeline-content {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    width: 45%;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-
-  .timeline-content:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    border-color: var(--golden);
-  }
-
-  .timeline-content h3 {
-    color: var(--golden);
-    margin-bottom: 0.5rem;
-  }
-
-  .timeline-content h4 {
-    color: var(--caramel);
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-
-  .timeline-content ul {
-    margin-top: 1rem;
-    padding-left: 1.5rem;
-  }
-
-  .timeline-content li {
-    margin-bottom: 0.5rem;
-    color: var(--text-muted);
-  }
-
-  .timeline-date {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--golden);
-    color: var(--dark-bg);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-
-  /* Skills Grid */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .skill-category {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-  }
-
-  .skill-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    border-color: var(--golden);
-  }
-
-  .skill-category h3 {
-    color: var(--golden);
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
-  }
-
-  .skill-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    background: rgba(218, 165, 32, 0.1);
-    border-radius: 8px;
-  }
-
-  .skill-name {
-    font-weight: 500;
-  }
-
-  .skill-level {
-    background: var(--golden);
-    color: var(--dark-bg);
-    padding: 0.2rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-
-  /* Projects Grid */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .project-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    border-color: var(--golden);
-  }
-
-  .project-image {
-    height: 200px;
-    background: linear-gradient(45deg, var(--primary-brown), var(--caramel));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .project-card:hover .project-image::before {
-    left: 100%;
-  }
-
-  .project-content {
-    padding: 1.5rem;
-  }
-
-  .project-content h3 {
-    color: var(--golden);
-    margin-bottom: 0.5rem;
-  }
-
-  .project-content p {
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-  }
-
-  .project-links {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .project-link {
-    color: var(--caramel);
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    transition: color 0.3s ease;
-  }
-
-  .project-link:hover {
-    color: var(--golden);
-  }
-
-  .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .tech-tag {
-    background: var(--caramel);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-
-  /* Certificates Section */
-  .certificates-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .certificate-card {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid var(--border);
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-
-  .certificate-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    border-color: var(--golden);
-  }
-
-  .certificate-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .certificate-card h3 {
-    color: var(--golden);
-    margin-bottom: 0.5rem;
-  }
-
-  .certificate-card p {
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-  }
-
-  .certificate-link {
-    color: var(--caramel);
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .certificate-link:hover {
-    color: var(--golden);
-  }
-
-  /* Contact Form */
-  .contact-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .contact-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .contact-item {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
-  }
-
-  .contact-item:hover {
-    transform: translateY(-5px);
-    border-color: var(--golden);
-  }
-
-  .contact-item i {
-    font-size: 2rem;
-    color: var(--golden);
-    margin-bottom: 1rem;
-  }
-
-  .contact-item h3 {
-    color: var(--golden);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-item a {
-    color: var(--caramel);
-    text-decoration: none;
-  }
-
-  .contact-item a:hover {
-    color: var(--golden);
-  }
-
-  /* Footer */
-  footer {
-    background: var(--card-bg);
-    padding: 3rem 2rem 2rem;
-    text-align: center;
-    border-top: 1px solid var(--border);
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .social-link {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, var(--caramel), var(--golden));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-  }
-
-  .social-link:hover {
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 20px rgba(218, 165, 32, 0.3);
-  }
-
-  .footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-nav a {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .footer-nav a:hover {
-    color: var(--golden);
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-    }
-
-    .nav-links {
-      position: fixed;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(15px);
-      flex-direction: column;
-      padding: 2rem;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-
-    .nav-links.active {
-      transform: translateX(0);
-    }
-
-    .about-content {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-
-    .timeline::before {
-      left: 20px;
-    }
-
-    .timeline-item {
-      flex-direction: column;
-      align-items: flex-start;
-      padding-left: 50px;
-    }
-
-    .timeline-content {
-      width: 100%;
-    }
-
-    .timeline-date {
-      position: relative;
-      left: -30px;
-      transform: none;
-      margin-bottom: 1rem;
-    }
-
-    .hero-buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cv-download {
-      margin-left: 0;
-    }
-  }
-
-  /* Scroll animations */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease;
-  }
-
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Loading animation */
-  .loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--dark-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease;
-  }
-
-  .loading.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid var(--border);
-    border-top: 3px solid var(--golden);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afrocentric Data Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .visual-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffcc02;
+            text-align: center;
+        }
+
+        /* Visual 1: Data Flow Visualization */
+        .data-flow {
+            position: relative;
+            height: 300px;
+            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.2) 0%, transparent 70%);
+        }
+
+        .flow-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        .node-source {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            top: 20px;
+            left: 20px;
+        }
+
+        .node-process {
+            background: linear-gradient(45deg, #ffcc02, #ff6b35);
+            top: 120px;
+            left: 200px;
+        }
+
+        .node-storage {
+            background: linear-gradient(45deg, #2d1b69, #ff6b35);
+            top: 220px;
+            left: 350px;
+        }
+
+        .flow-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b35, #ffcc02);
+            animation: flowAnimation 3s infinite;
+        }
+
+        .line1 {
+            top: 60px;
+            left: 100px;
+            width: 120px;
+            transform: rotate(25deg);
+        }
+
+        .line2 {
+            top: 160px;
+            left: 280px;
+            width: 120px;
+            transform: rotate(25deg);
+        }
+
+        /* Visual 2: African Pattern Network */
+        .pattern-network {
+            position: relative;
+            height: 300px;
+            background: conic-gradient(from 0deg, #ff6b35, #ffcc02, #f7931e, #ff6b35);
+            opacity: 0.3;
+            border-radius: 20px;
+        }
+
+        .network-nodes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .network-node {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffcc02;
+            border-radius: 50%;
+            animation: networkPulse 4s infinite;
+        }
+
+        .node1 { top: 50px; left: 80px; animation-delay: 0s; }
+        .node2 { top: 120px; left: 200px; animation-delay: 0.5s; }
+        .node3 { top: 80px; left: 300px; animation-delay: 1s; }
+        .node4 { top: 180px; left: 150px; animation-delay: 1.5s; }
+        .node5 { top: 220px; left: 280px; animation-delay: 2s; }
+
+        /* Visual 3: Data Analytics Dashboard */
+        .analytics-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 300px;
+        }
+
+        .chart-container {
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(255, 204, 2, 0.3);
+        }
+
+        .chart-bar {
+            height: 100%;
+            background: linear-gradient(180deg, #ffcc02, #ff6b35);
+            border-radius: 5px;
+            animation: barGrow 3s ease-in-out infinite;
+        }
+
+        .chart-circle {
+            width: 100px;
+            height: 100px;
+            border: 8px solid #ff6b35;
+            border-top: 8px solid #ffcc02;
+            border-radius: 50%;
+            animation: rotate 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        .metric-text {
+            text-align: center;
+            color: #ffcc02;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Visual 4: Geometric African Patterns */
+        .geometric-pattern {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(45deg, transparent 25%, rgba(255, 107, 53, 0.1) 25%, rgba(255, 107, 53, 0.1) 50%, transparent 50%, transparent 75%, rgba(255, 204, 2, 0.1) 75%);
+            background-size: 40px 40px;
+            animation: patternMove 10s linear infinite;
+        }
+
+        .pattern-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 4px solid #ffcc02;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(45, 27, 105, 0.8);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes flowAnimation {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes networkPulse {
+            0%, 100% { transform: scale(1); background: #ffcc02; }
+            50% { transform: scale(1.5); background: #ff6b35; }
+        }
+
+        @keyframes barGrow {
+            0%, 100% { transform: scaleY(0.6); }
+            50% { transform: scaleY(1); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        .description {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 107, 53, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 204, 2, 0.3);
+        }
+    </style>
 </head>
-
 <body>
-      <!-- Loading Screen -->
-  <div class="loading" id="loading">
-    <div class="loading-spinner"></div>
-  </div>
-
-  <!-- Animated Background -->
-  <div class="animated-bg"></div>
-  <div class="geometric-shapes" id="shapes"></div>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
-      <a href="#" class="logo">MW</a>
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="about.html">More About Me</a></li>
-      </ul>
-    </div>
-  </nav>
-  <section id="timeline">
-    <h2 class="section-title">My Journey</h2>
-    <div class="timeline">
-  
-      <!-- Childhood Curiosity -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Curiosity Begins</h3>
-          <h4>Early Years</h4>
-          <img src="https://via.placeholder.com/400x200?text=Curious+Child" alt="Curious child" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            My journey started with a deep curiosity about how things work. As a child, I loved taking apart radios and watching documentaries about the planet. This early fascination with technology and nature would shape everything that followed.
-          </p>
+    <div class="container">
+        <div style="margin-bottom: 30px;">
+            <a href="index.html" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: #ffcc02;
+                text-decoration: none;
+                font-size: 1.1rem;
+                padding: 10px 20px;
+                border: 2px solid rgba(255, 204, 2, 0.3);
+                border-radius: 25px;
+                background: rgba(255, 107, 53, 0.1);
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(255, 204, 2, 0.3)'" 
+               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                <span style="font-size: 1.2rem;">←</span>
+                Back to Home
+            </a>
         </div>
-        <span class="timeline-date">2000s</span>
-      </div>
-  
-      <!-- First Steps in Tech -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Discovering Technology</h3>
-          <h4>School Days</h4>
-          <img src="https://via.placeholder.com/400x200?text=First+Computer" alt="First computer" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            In school, I wrote my first lines of code and built simple websites for fun. The thrill of solving problems and seeing my ideas come to life on a screen was addictive. I joined coding clubs and started exploring data and logic.
-          </p>
-        </div>
-        <span class="timeline-date">2010s</span>
-      </div>
-  
-      <!-- University and Growth -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Learning and Growth</h3>
-          <h4>University</h4>
-          <img src="https://via.placeholder.com/400x200?text=University+Life" alt="University life" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            University opened doors to new disciplines. I dove into computer science, statistics, and environmental science. I spent late nights on group projects, hackathons, and research, learning that collaboration is as important as code.
-          </p>
-        </div>
-        <span class="timeline-date">2016–2020</span>
-      </div>
-  
-      <!-- DevOps and Cloud -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Building in the Cloud</h3>
-          <h4>DevOps Consultant</h4>
-          <img src="https://via.placeholder.com/400x200?text=DevOps+Cloud" alt="DevOps cloud" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            My professional journey began as a DevOps consultant. I designed automated pipelines, managed cloud infrastructure, and learned to balance reliability with innovation. Every deployment was a lesson in resilience and teamwork.
-          </p>
-        </div>
-        <span class="timeline-date">2024</span>
-      </div>
-  
-      <!-- Data Engineering & AWS -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Engineering with Data</h3>
-          <h4>ALX AWS Program</h4>
-          <img src="https://via.placeholder.com/400x200?text=Data+Engineering" alt="Data engineering" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            Today, I am deepening my skills in data engineering and cloud through the ALX AWS Cloud program. I build scalable data pipelines, analyze complex datasets, and use technology to find insights that matter.
-          </p>
-        </div>
-        <span class="timeline-date">2025</span>
-      </div>
-  
-      <!-- Writing and Communication -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Sharing Stories</h3>
-          <h4>Writer and Researcher</h4>
-          <img src="https://via.placeholder.com/400x200?text=Writing+Research" alt="Writing research" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            I write technical guides, research articles, and creative essays. My goal is to make technology accessible and inspire others to use data for good. I also translate between English, Swahili, and French, bridging ideas across cultures.
-          </p>
-        </div>
-        <span class="timeline-date">Ongoing</span>
-      </div>
-  
-      <!-- Blockchain and Climate -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Exploring New Frontiers</h3>
-          <h4>Blockchain & Climate Advocacy</h4>
-          <img src="https://via.placeholder.com/400x200?text=Blockchain+Climate" alt="Blockchain and climate" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            I am passionate about blockchain and its potential for transparency, as well as using data to address climate challenges. I believe in the power of technology to drive real-world impact.
-          </p>
-        </div>
-        <span class="timeline-date">Future</span>
-      </div>
-  
-      <!-- Gallery and Collage -->
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>Gallery & Collage</h3>
-          <h4>Snapshots of My Journey</h4>
-          <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-bottom:1rem;">
-            <img src="https://via.placeholder.com/100x100?text=Hackathon" alt="Hackathon" style="border-radius:8px;">
-            <img src="https://via.placeholder.com/100x100?text=Workshop" alt="Workshop" style="border-radius:8px;">
-            <img src="https://via.placeholder.com/100x100?text=Team" alt="Team" style="border-radius:8px;">
-            <img src="https://via.placeholder.com/100x100?text=Nature" alt="Nature" style="border-radius:8px;">
-          </div>
-          <p>
-            My journey is filled with moments of learning, teamwork, and discovery. Each photo is a memory, a milestone, and a reminder of the path I’ve traveled.
-          </p>
-        </div>
-        <span class="timeline-date">Gallery</span>
-      </div>
-      <!-- Writing Samples and PDF Attach -->
-<div class="timeline-item">
-    <div class="timeline-content">
-      <h3>My Writing</h3>
-      <h4>Selected Works</h4>
-      <a href="https://your-repo-link.github.io/path-to-your-pdf.pdf" target="_blank">
-        <img src="https://via.placeholder.com/400x200?text=Click+to+Read+PDF" alt="PDF Cover" style="width:100%;border-radius:10px;margin-bottom:1rem;box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-      </a>
-      <p>
-        I enjoy writing about technology, climate, and human stories. Click the cover above to open a selected PDF from my portfolio. You can also <a href="https://github.com/your-github/your-writing-project" style="color:#D2691E;">view the repository here</a>.
-      </p>
-    </div>
-    <span class="timeline-date">Portfolio</span>
-  </div>
-  
-  
-      <!-- Writing Samples and PDF Attach
-      <div class="timeline-item">
-        <div class="timeline-content">
-          <h3>My Writing</h3>
-          <h4>Selected Works</h4>
-          <img src="https://via.placeholder.com/400x200?text=Article+Sample" alt="Article sample" style="width:100%;border-radius:10px;margin-bottom:1rem;">
-          <p>
-            I enjoy writing about technology, climate, and human stories. You can <a href="https://github.com/your-github/your-writing-project" style="color:#D2691E;">read my work here</a> or attach your own PDF below.
-          </p>
-          <input type="file" accept=".pdf" style="margin-top:1rem;">
-        </div>
-        <span class="timeline-date">Portfolio</span>
-      </div>
-  
-    </div> -->
-  </section>
-  
- <!-- Footer -->
-  <footer>
-    <div class="social-links">
-      <a href="https://linkedin.com/in/michelle-wambaya" target="_blank" class="social-link">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a href="https://github.com/michellewambaya" target="_blank" class="social-link">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://twitter.com/michellewambaya" target="_blank" class="social-link">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="mailto:michellewambaya@gmail.com" class="social-link">
-        <i class="fas fa-envelope"></i>
-      </a>
-    </div>
-
-    <div class="footer-nav">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#certificates">Certificates</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <p style="color: var(--text-muted); margin-top: 1rem;">
-      © 2024 Michelle Wambaya. Built with passion and lots of coffee ☕
-    </p>
-  </footer>
-
-  <script>
-    // Loading screen
-    window.addEventListener('load', function() {
-      const loading = document.getElementById('loading');
-      setTimeout(() => {
-        loading.classList.add('hidden');
-      }, 1000);
-    });
-
-    // Generate floating shapes
-    function createShapes() {
-      const shapesContainer = document.getElementById('shapes');
-      const shapeTypes = ['circle', 'square', 'triangle'];
-      
-      for (let i = 0; i < 15; i++) {
-        const shape = document.createElement('div');
-        const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-        const size = Math.random() * 50 + 20;
+        <h1>Afrocentric Data Engineering Portfolio</h1>
         
-        shape.className = `shape shape-${shapeType}`;
-        shape.style.left = Math.random() * 100 + '%';
-        shape.style.top = Math.random() * 100 + '%';
-        shape.style.animationDelay = Math.random() * 20 + 's';
-        
-        if (shapeType === 'circle') {
-          shape.style.width = size + 'px';
-          shape.style.height = size + 'px';
-        } else if (shapeType === 'square') {
-          shape.style.width = size + 'px';
-          shape.style.height = size + 'px';
-        } else if (shapeType === 'triangle') {
-          shape.style.borderLeft = size/2 + 'px solid transparent';
-          shape.style.borderRight = size/2 + 'px solid transparent';
-          shape.style.borderBottom = size + 'px solid var(--caramel)';
-        }
-        
-        shapesContainer.appendChild(shape);
-      }
-    }
+        <div class="gallery">
+            <!-- Visual 1: Data Pipeline Flow -->
+            <div class="visual-card">
+                <h3 class="card-title">Data Pipeline Architecture</h3>
+                <div class="data-flow">
+                    <div class="flow-node node-source">SRC</div>
+                    <div class="flow-node node-process">ETL</div>
+                    <div class="flow-node node-storage">DB</div>
+                    <div class="flow-line line1"></div>
+                    <div class="flow-line line2"></div>
+                </div>
+                <div class="description">
+                    Real-time data processing pipeline showcasing the flow from source systems through transformation layers to analytics-ready storage. Built with modern African-inspired design principles.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Apache Kafka</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Apache Spark</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                </div>
+            </div>
 
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
+            <!-- Visual 2: Network Topology -->
+            <div class="visual-card">
+                <h3 class="card-title">Distributed Network Systems</h3>
+                <div class="pattern-network">
+                    <div class="network-nodes">
+                        <div class="network-node node1"></div>
+                        <div class="network-node node2"></div>
+                        <div class="network-node node3"></div>
+                        <div class="network-node node4"></div>
+                        <div class="network-node node5"></div>
+                    </div>
+                </div>
+                <div class="description">
+                    Scalable microservices architecture inspired by traditional African community networks. Each node represents a service in the distributed system, working in harmony like a village ecosystem.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
 
-    menuToggle.addEventListener('click', function() {
-      navLinks.classList.toggle('active');
-      const icon = menuToggle.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-    });
+            <!-- Visual 3: Analytics Dashboard -->
+            <div class="visual-card">
+                <h3 class="card-title">Real-time Analytics Engine</h3>
+                <div class="analytics-dashboard">
+                    <div class="chart-container">
+                        <div class="chart-bar"></div>
+                        <div class="metric-text">Performance Metrics</div>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-circle"></div>
+                        <div class="metric-text">System Health</div>
+                    </div>
+                </div>
+                <div class="description">
+                    Interactive dashboard providing real-time insights into data processing performance, system health, and business metrics. Features responsive design with Afrocentric color schemes.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">Elasticsearch</span>
+                </div>
+            </div>
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        const icon = menuToggle.querySelector('i');
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
-      });
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    // Observe fade-in elements
-    document.querySelectorAll('.fade-in').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Active navigation highlighting
-    window.addEventListener('scroll', function() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-links a');
-      
-      let currentSection = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-          currentSection = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-          link.classList.add('active');
-        }
-      });
-    });
-
-    // Initialize shapes when page loads
-    createShapes();
-
-    // Add some interactive effects
-    document.querySelectorAll('.project-card, .skill-category, .certificate-card').forEach(card => {
-      card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-      });
-      
-      card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-      });
-    });
-
-    // Typewriter effect for hero subtitle
-    function typeWriter(element, text, speed = 100) {
-      let i = 0;
-      element.innerHTML = '';
-      
-      function type() {
-        if (i < text.length) {
-          element.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      
-      type();
-    }
-
-    // Initialize typewriter effect
-    setTimeout(() => {
-      const subtitle = document.querySelector('.hero-subtitle');
-      const originalText = subtitle.textContent;
-      typeWriter(subtitle, originalText, 50);
-    }, 1500);
-  </script>
+            <!-- Visual 4: Geometric Data Patterns -->
+            <div class="visual-card">
+                <h3 class="card-title">Pattern Recognition Engine</h3>
+                <div class="geometric-pattern">
+                    <div class="pattern-overlay">
+                        ML MODELS
+                    </div>
+                </div>
+                <div class="description">
+                    Machine learning pipeline for pattern recognition and predictive analytics. The geometric patterns represent the mathematical foundations inspired by traditional African textile designs and architectural patterns.
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">scikit-learn</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Apache Airflow</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
